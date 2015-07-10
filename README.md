@@ -11,10 +11,12 @@ Many lines are edited to test and to rebuild. The two most important modificatio
 
 - "lookup = (long long *)calloc( vocab_size , sizeof(long long) );" is corrected as  
   "lookup = (long long *)calloc( vocab_size + 1, sizeof(long long) );"
+
 One could see why in the following "for" loop. 
 This bug can cause "core dump" at unexpected execution time on various configurations.
 
 - The last "qsort(cr, ind, sizeof(CREC), compare_crec); write_chunk(cr,ind,foverflow);" should be under condition "if (ind>0)"
+
 This bug is possible to inject a record with cr.word1=0, cr.word2=0, cr.val=0.0 into the cooccurance bin file if the co-occurance data is relatively small according to the "-memery" set. It's hard to find it out after shuffling. It can cause glove.c crash after computing log(cr.val) and AdaGrad (divde 0).
 	
 
