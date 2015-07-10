@@ -17,7 +17,7 @@ This bug can cause "core dump" at unexpected execution time on various configura
 
 - The last "qsort(cr, ind, sizeof(CREC), compare_crec); write_chunk(cr,ind,foverflow);" should be under condition "if (ind>0)"
 
-This bug is possible to inject a record with cr.word1=0, cr.word2=0, cr.val=0.0 into the cooccurrence bin file if the co-occurrence data is relatively small according to the "-memory" set. It's hard to find it out after shuffling. It can cause glove.c crash after computing log(cr.val) and AdaGrad (divde 0).
+This bug is possible to inject a record with cr[].word1=0, cr[].word2=0, cr[].val=0.0 into the cooccurrence bin file if the co-occurrence data is relatively small according to the "-memory" set. It's hard to find it out after shuffling. It can cause glove.c crash after computing log(cr.val) and AdaGrad (divde 0).
 	
 
 The test is successful on Ubuntu 14.04. 
